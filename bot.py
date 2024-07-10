@@ -1,4 +1,3 @@
-from telegram import Update, KeyboardButton, ReplyKeyboardMarkup, WebAppInfo, InputMediaPhoto, InputMediaVideo
 from telegram.ext import ApplicationBuilder, CallbackContext, CommandHandler, MessageHandler, filters, ConversationHandler
 from Settings_loader import BOT_TOKEN, BOT_USERNAME, TARGET_CHAT_ID, DJANGO_URL
 import json
@@ -6,6 +5,8 @@ from time import sleep
 import requests
 from os import makedirs
 from os.path import exists, join
+from datetime import datetime
+from KeyBoard import *
 
 REQUEST_MEDIA = 1
 MEDIA_FOLDER = 'media_files'
@@ -14,13 +15,19 @@ if not exists(MEDIA_FOLDER):
 
 
 async def launch_web_ui(update: Update, context: CallbackContext):
-    kb = [
-        [KeyboardButton(
-            "Окрыть форму отчетов",
-            web_app=WebAppInfo("https://igggor.github.io")  # obviously, set yours here.
-        )]
-    ]
     await update.message.reply_text("Приветствую, я Бот СТВ для отправки отчетов", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True))
+
+
+def check_date(date: str) -> str:
+    date = date.replace(".", " ").strip().split()
+    if (len(date[0]) == 4 and 2 <= len(date[1]) + len(date[-1]) <= 4
+            and 0 < int(date[1]) < 13 and 0 < int(date[-1]) < 32):
+        return '.'.join(date[::-1])
+    elif (len(date[-1]) == 4 and 2 <= len(date[1]) + len(date[0]) <= 4
+          and 0 < int(date[1]) < 13 and 0 < int(date[0]) < 32):
+        return '.'.join(date)
+    else:
+        return datetime.now().strftime('%d.%m.%Y')
 
 
 async def web_app_data(update: Update, context: CallbackContext):
@@ -30,7 +37,8 @@ async def web_app_data(update: Update, context: CallbackContext):
     otch = data["lines"][2]["value"]
     worker = data["lines"][3]["value"]
     address = data["lines"][4]["value"]
-    date = data["lines"][5]["value"]
+    date = check_date(data["lines"][5]["value"])
+    print(date)
     req = [Fam, name, worker, address, date]
     if "" in req:
         await update.message.reply_text("Не были введены обязательные данные. Заполните форму заново")
@@ -122,16 +130,9 @@ async def done(update: Update, context: CallbackContext):
             # Отправка в другой чат
             sleep(1)
             await context.bot.send_media_group(chat_id=TARGET_CHAT_ID, media=media_group_objects)
-        kb = [
-            [KeyboardButton(
-                "Открыть форму отчета",
-                web_app=WebAppInfo("https://igggor.github.io")  # obviously, set yours here.
-            )]
-        ]
         await update.message.reply_text("Отчет отправлен", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True))
-
     else:
-        await update.message.reply_text("Нет загруженных медиафайлов.")
+        await update.message.reply_text("Нет загруженных медиафайлов.", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True))
 
     context.user_data.clear()
     return ConversationHandler.END
