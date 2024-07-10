@@ -12,21 +12,27 @@
 ## Screenshots
 
 ![Белая тема](imgs_for_readme/white_theme.jpg)
+
 Форма в белой теме
 
 ![Темная тема](imgs_for_readme/black_theme.jpg)
+
 Форма в темной теме
 
 ![Заполненная форма](imgs_for_readme/data_filled.jpg)
+
 Заполненная форма
 
 ![Отправленная форма](imgs_for_readme/form_sent.jpg)
+
 Форма отправлена
 
 ![Отправленные медиа](imgs_for_readme/media_sent.jpg)
+
 Отправленные медиа
 
 ![Отчет в чате телеграмма](imgs_for_readme/form_in_chat.jpg)
+
 Финальный отчет в чате Телеграмма
 
 
