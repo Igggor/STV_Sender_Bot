@@ -88,4 +88,5 @@
 
 ![GitHub top language](https://img.shields.io/github/languages/top/Igggor/STV_Sender_Bot)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Igggor/STV_Sender_Bot)
+![Static Badge](https://img.shields.io/badge/Igggor-STV_Sender_Bot-STV_Sender_Bot)
 
