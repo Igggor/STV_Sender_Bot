@@ -3,7 +3,7 @@ from os import getenv
 import logging
 from os.path import exists
 from modules.db import UserDatabase
-if exists("../.env"):
+if exists(".env"):
     from dotenv import load_dotenv
     load_dotenv()
 

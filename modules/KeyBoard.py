@@ -2,6 +2,6 @@ from telegram import Update, KeyboardButton, ReplyKeyboardMarkup, WebAppInfo, In
 kb = [
         [KeyboardButton(
             "Окрыть форму отчетов",
-            web_app=WebAppInfo("https://igggor.github.io")  # obviously, set yours here.
+            web_app=WebAppInfo("https://igggor.github.io")
         )]
     ]

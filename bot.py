@@ -35,6 +35,10 @@ async def handle_media(update: Update, context: CallbackContext):
 
         with open(file_path, 'rb') as f:
             response = requests.post(DJANGO_URL, files={'file': f}, data=data)
+            if response.status_code == 200:
+                logger.info(f"Photo send to the server")
+            else:
+                logger.error(f"Photo was not sent to the server. \n Status code: {response.status_code}")
 
     elif update.message.video:
         media_file_id = update.message.video.file_id
@@ -47,7 +51,10 @@ async def handle_media(update: Update, context: CallbackContext):
 async def web_app_data(update: Update, context: CallbackContext):
     data = loads(update.message.web_app_data.data)
     fam = data["lines"][0]["value"]
-    name_ot = data["lines"][1]["value"]
+    try:
+        name_ot = data["lines"][1]["value"]
+    except KeyError:
+        name_ot = ''
     address = data["lines"][2]["value"]
     date = check_date(data["lines"][3]["value"])
     name, otch = check_name(name_ot)

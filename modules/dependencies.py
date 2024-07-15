@@ -5,7 +5,8 @@ from modules.settings_loader import (BOT_TOKEN, BOT_USERNAME, TARGET_CHAT_ID, DJ
                              logger, db)
 
 from modules.KeyBoard import *
-from modules.main_funcs import check_name, check_date
+from modules.funcs.check_name import check_name
+from modules.funcs.check_date import check_date
 
 from json import loads
 import requests

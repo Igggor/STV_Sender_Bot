@@ -1,3 +1,6 @@
+"""
+Файл с функцией проверкой даты, вводимой пользователем в Web-App Форму.
+"""
 from datetime import datetime
 
 
@@ -41,7 +44,8 @@ def check_date(date: str) -> str:
             return 31
 
     try:
-        date = date.replace("/", ".").replace(",", ".").replace(".", " ").strip().split()
+        date = date.replace("-", ".").replace("/", ".")
+        date = date.replace(",", ".").replace(".", " ").strip().split()
         if (len(date[0]) == 4 and 2 <= len(date[1]) + len(date[-1]) <= 4
                 and 0 < int(date[1]) < 13 and 0 < int(date[-1]) <= max_days_in_month(int(date[0]), int(date[1]))):
             return '.'.join(date[::-1])
