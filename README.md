@@ -1,6 +1,16 @@
 
 # TG Бот для СТВ с Web-App Формой
 
+
+## Навигация
+
+ - [Пользовательская документация](https://github.com/Igggor/STV_Sender_Bot/blob/main/user_manual.md)
+ - [Код проекта](https://github.com/Igggor/STV_Sender_Bot/blob/main)
+ - [Контакт с автором](https://t.me/ii_nikolaev)
+
+
+
+
 ![GitHub top language](https://img.shields.io/github/languages/top/Igggor/STV_Sender_Bot)
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/Igggor/STV_Sender_Bot)
